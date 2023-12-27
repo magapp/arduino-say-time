@@ -192,6 +192,7 @@ void setup() {
     // }
   
     pinMode(3,OUTPUT);
+    delay(2000);
     voice.say(spPAUSE1);
     voice.say(spGOOD);
     voice.say(spMORNING);
@@ -209,7 +210,6 @@ int counter = 0;
 void loop() {
     counter = counter + 1;
     if (counter == 59) {
-      Serial.println("counter == 59");
       counter = 0;
       RtcDateTime now = Rtc.GetDateTime();
       Serial.print("Minute is: ");
@@ -217,21 +217,22 @@ void loop() {
       if (now.Minute() == 0) {
         Serial.println("Say time full hour");
         pinMode(3,OUTPUT);
+        delay(1000);
         voice.say(spPAUSE1);
-  
         voice.say(spTHE);
         voice.say(spTIME);
         voice.say(spIS);
         sayDigit(now.Hour());
         pinMode(3,INPUT);
      }
-     //if (now.Minute() == 30) {
-     // pinMode(3,OUTPUT);
-     // voice.say(spPAUSE1);
-     // voice.say(spTONE1);
-     // pinMode(3,INPUT);
-     //}
-     delay(500);
+     // if (now.Minute() == 30) {
+     //  Serial.println("Say time halv hour");
+     //  pinMode(3,OUTPUT);
+     //  delay(1000);
+     //  voice.say(spPAUSE1);
+     //  voice.say(spTONE1);
+     //  pinMode(3,INPUT);
+     // }
     }
 
     if (!digitalRead(12))
@@ -239,6 +240,7 @@ void loop() {
         Serial.println("Say time button is pressed");
         RtcDateTime now = Rtc.GetDateTime();
         pinMode(3,OUTPUT);
+        delay(1000);
         voice.say(spPAUSE1);
         voice.say(spTHE);
         voice.say(spTIME);
@@ -247,7 +249,7 @@ void loop() {
         sayDigit(now.Minute());
         pinMode(3,INPUT);
     }
-    delay(1000);
+  delay(1000);
 }
 
 #define countof(a) (sizeof(a) / sizeof(a[0]))
