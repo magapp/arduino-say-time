@@ -75,8 +75,6 @@ void setup() {
     printDateTime(compiled);
     Serial.println("");
     
-    Rtc.IsDateTimeValid();
-
     if (!Rtc.IsDateTimeValid()) 
     {
         // Common Cuases:
@@ -112,6 +110,9 @@ void setup() {
         Serial.println("RTC is the same as compile time! (not expected but all is fine)");
     }
 
+    // froce set compile time
+    // Rtc.SetDateTime(compiled);
+
     Serial.println("Current time:");
     printDateTime(now);
     Serial.println("");
@@ -123,6 +124,7 @@ void setup() {
     Rtc.Enable32kHzPin(false);
     Rtc.SetSquareWavePin(DS3231SquareWavePin_ModeNone);
     delay(3000);
+    
       
     // set mode
     if (!digitalRead(12)) {
@@ -206,26 +208,32 @@ void setup() {
 int counter = 0;
 void loop() {
     counter = counter + 1;
-    if (counter == 60) {
-     RtcDateTime now = Rtc.GetDateTime();
-     if (now.Minute() == 0) {
-      pinMode(3,OUTPUT);
-      voice.say(spPAUSE1);
+    if (counter == 59) {
+      Serial.println("counter == 59");
+      counter = 0;
+      RtcDateTime now = Rtc.GetDateTime();
+      Serial.print("Minute is: ");
+      Serial.println(now.Minute());
+      if (now.Minute() == 0) {
+        Serial.println("Say time full hour");
+        pinMode(3,OUTPUT);
+        voice.say(spPAUSE1);
   
-      voice.say(spTHE);
-      voice.say(spTIME);
-      voice.say(spIS);
-      sayDigit(now.Hour());
-      //sayDigit(now.Second());
-      pinMode(3,INPUT);
+        voice.say(spTHE);
+        voice.say(spTIME);
+        voice.say(spIS);
+        sayDigit(now.Hour());
+        pinMode(3,INPUT);
      }
-     if (now.Minute() == 30) {
-      pinMode(3,OUTPUT);
-      voice.say(spPAUSE1);
-      voice.say(spTONE1);
-      pinMode(3,INPUT);
-     }
+     //if (now.Minute() == 30) {
+     // pinMode(3,OUTPUT);
+     // voice.say(spPAUSE1);
+     // voice.say(spTONE1);
+     // pinMode(3,INPUT);
+     //}
+     delay(500);
     }
+
     if (!digitalRead(12))
     {
         Serial.println("Say time button is pressed");
