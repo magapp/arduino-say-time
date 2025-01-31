@@ -44,7 +44,7 @@ The ESP32 used is [AZDelivery Freenove Wroom](https://www.amazon.com/FREENOVE-ES
 
 ## Output filter and connections
 
-![alt tag](/img/kplug.jpg)
+![alt tag](/img/kplug.png)
 
 ```
                       _____
