@@ -18,10 +18,10 @@ The program will connect to Wifi and to a NTP-server to ensure the exact time. I
 
 LED will light up different brightness of green during wifi setup and different brightness of yellow during MQTT-connection.
 
-In order to setup wifi, ntp-server, mqtt-server, start the ESP32 in configuration mode. This can be achieved by pressing the button during startup. White led will light up. In configuration mode, the ESP32 will act as an access point so you can connect and do the setup.
+In order to setup wifi, ntp-server, mqtt-server, start the ESP32 in configuration mode. This can be achieved by pressing the button during startup. White LED will light up. In configuration mode, the ESP32 will act as an access point so you can connect and do the setup.
 
 ## MQTT Commands
-To set "SayTime" and "BeepTime" or check status, you can send commands using MQTT. "<id>" is the boards mac adress.
+To set "SayTime" and "BeepTime" or check status, you can send commands using MQTT. "id" is the board mac adress.
 
 ```
 say_time/<id>/command  payload: status
